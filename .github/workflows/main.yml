@@ -33,12 +33,10 @@ jobs:
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         with:
-          projectKey: "frontend-analysis"
-          projectName: "frontend-analysis"
-          projectVersion: "1.0"
+          
           token: ${{ secrets.SONAR_TOKEN }}
           host: ${{ secrets.SONAR_HOST_URL }}
-          sources: "Frontend/src"
+          sources: "Frontend/distt"
 
       
       
