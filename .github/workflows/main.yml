@@ -1,0 +1,42 @@
+name: Frontend and Infrastructure CI-CD
+
+on:
+  workflow_dispatch:
+    
+      
+  
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v4
+
+      # Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      
+      # Install Yarn and build the frontend
+      - name: Install Yarn and build frontend
+        run: |
+          npm install -g yarn
+          cd Frontend
+          yarn install
+          yarn build
+        
+      
+      - name: sonar-cube analysis
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      
+      
+     
+
+         
