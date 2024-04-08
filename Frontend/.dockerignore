@@ -1,0 +1,9 @@
+# Ignore node_modules directory
+node_modules
+
+# Ignore any development-specific files
+
+
+# Ignore Docker-specific files
+.dockerignore
+Dockerfile.frontend
