@@ -1,45 +1,27 @@
-name: Frontend and Infrastructure CI-CD
+name: Build
 
 on:
-  workflow_dispatch:
-    
-      
-  
+  push:
+    branches:
+      - main
+
 
 jobs:
-  build-frontend:
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    
-
+    permissions: read-all
     steps:
-      - name: Git Checkout
-        uses: actions/checkout@v4
-
-      # # Install Node.js
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20
-      
-      # # Install Yarn and build the frontend
-      # - name: Install Yarn and build frontend
-      #   run: |
-      #     npm install -g yarn
-      #     cd Frontend
-      #     yarn install
-      #     yarn build
-        
-      
-        
-          
-      - name: SonarQube Scan
-        uses: kitabisa/sonarqube-action@v1.2.0
+      - uses: actions/checkout@v4
         with:
-          host: ${{ secrets.SONAR_HOST_URL }}
-          login: ${{ secrets.SONAR_TOKEN }}
-          projectKey: "ishwar-frontend"
-        
-       
-     
-
-         
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      # If you wish to fail your job when the Quality Gate is red, uncomment the
+      # following lines. This would typically be used to fail a deployment.
+      # - uses: sonarsource/sonarqube-quality-gate-action@master
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
