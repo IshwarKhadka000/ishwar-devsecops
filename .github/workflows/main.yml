@@ -9,7 +9,7 @@ on:
 jobs:
   build-frontend:
     runs-on: ['self-hosted', 'Linux', 'ARM64']
-    permissions: read-all
+    
 
     steps:
       - name: Git Checkout
