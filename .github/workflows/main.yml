@@ -15,19 +15,19 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v4
 
-      # Install Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      # # Install Node.js
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 20
       
-      # Install Yarn and build the frontend
-      - name: Install Yarn and build frontend
-        run: |
-          npm install -g yarn
-          cd Frontend
-          yarn install
-          yarn build
+      # # Install Yarn and build the frontend
+      # - name: Install Yarn and build frontend
+      #   run: |
+      #     npm install -g yarn
+      #     cd Frontend
+      #     yarn install
+      #     yarn build
         
       
         
